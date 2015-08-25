@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Animal;
-use app\models\AnimalSearch;
+use app\models\AnimalPhoto;
+use app\models\AnimalPhotoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnimalController implements the CRUD actions for Animal model.
+ * AnimalPhotoController implements the CRUD actions for AnimalPhoto model.
  */
-class AnimalController extends Controller
+class AnimalPhotoController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class AnimalController extends Controller
     }
 
     /**
-     * Lists all Animal models.
+     * Lists all AnimalPhoto models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AnimalSearch();
+        $searchModel = new AnimalPhotoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,28 +42,29 @@ class AnimalController extends Controller
     }
 
     /**
-     * Displays a single Animal model.
-     * @param integer $id
+     * Displays a single AnimalPhoto model.
+     * @param integer $idanimal
+     * @param integer $idphoto
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($idanimal, $idphoto)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($idanimal, $idphoto),
         ]);
     }
 
     /**
-     * Creates a new Animal model.
+     * Creates a new AnimalPhoto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Animal();
+        $model = new AnimalPhoto();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idanimal]);
+            return $this->redirect(['view', 'idanimal' => $model->idanimal, 'idphoto' => $model->idphoto]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,17 +73,18 @@ class AnimalController extends Controller
     }
 
     /**
-     * Updates an existing Animal model.
+     * Updates an existing AnimalPhoto model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idanimal
+     * @param integer $idphoto
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idanimal, $idphoto)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idanimal, $idphoto);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idanimal]);
+            return $this->redirect(['view', 'idanimal' => $model->idanimal, 'idphoto' => $model->idphoto]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,28 +93,30 @@ class AnimalController extends Controller
     }
 
     /**
-     * Deletes an existing Animal model.
+     * Deletes an existing AnimalPhoto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idanimal
+     * @param integer $idphoto
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($idanimal, $idphoto)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idanimal, $idphoto)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Animal model based on its primary key value.
+     * Finds the AnimalPhoto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Animal the loaded model
+     * @param integer $idanimal
+     * @param integer $idphoto
+     * @return AnimalPhoto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idanimal, $idphoto)
     {
-        if (($model = Animal::findOne($id)) !== null) {
+        if (($model = AnimalPhoto::findOne(['idanimal' => $idanimal, 'idphoto' => $idphoto])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

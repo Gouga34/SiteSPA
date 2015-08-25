@@ -12,17 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'idanimal')->textInput() ?>
+
     <?= $form->field($model, 'type')->dropDownList([ 'chat' => 'Chat', 'chien' => 'Chien', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'zone')->dropDownList([ 'fourriere' => 'Fourriere', 'SPA' => 'SPA', 'FA' => 'FA', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'zone')->dropDownList([ 'fourriere' => 'Fourriere', 'spa' => 'Spa', 'fa' => 'Fa', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'etat')->dropDownList([ 'adopte+' => 'Adopte+', 'adopte-' => 'Adopte-', 'adoptable' => 'Adoptable', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'nom')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'sexe')->dropDownList([ 'male' => 'Male', 'femelle' => 'Femelle', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'sexe')->dropDownList([ 'mâle' => 'Mâle', 'femelle' => 'Femelle', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'sterilise')->textInput() ?>
+    <?= $form->field($model, 'sterilise')->dropDownList([ 'oui' => 'Oui', 'non' => 'Non', 'inconnu' => 'Inconnu', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'dateNaissance')->textInput() ?>
 
