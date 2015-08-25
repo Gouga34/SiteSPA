@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\AnimalSearch */
+/* @var $searchModel app\models\PhotoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Animals';
+$this->title = 'Photos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="animal-index">
+<div class="photo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Animal', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Photo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,21 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idanimal',
+            'idphoto',
+            'photo',
             'type',
-            'zone',
-            'etat',
-            'nom',
-            // 'sexe',
-            // 'sterilise',
-            // 'dateNaissance',
-            // 'race',
-            // 'description:ntext',
-            // 'ententeChiens',
-            // 'ententeChats',
-            // 'ententeEnfants',
-            // 'chienDuMois',
-            // 'coupDeCoeur',
+            'description:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

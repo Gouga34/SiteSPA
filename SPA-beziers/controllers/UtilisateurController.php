@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Animal;
-use app\models\AnimalSearch;
+use app\models\Utilisateur;
+use app\models\UtilisateurSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnimalController implements the CRUD actions for Animal model.
+ * UtilisateurController implements the CRUD actions for Utilisateur model.
  */
-class AnimalController extends Controller
+class UtilisateurController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class AnimalController extends Controller
     }
 
     /**
-     * Lists all Animal models.
+     * Lists all Utilisateur models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AnimalSearch();
+        $searchModel = new UtilisateurSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,8 +42,8 @@ class AnimalController extends Controller
     }
 
     /**
-     * Displays a single Animal model.
-     * @param integer $id
+     * Displays a single Utilisateur model.
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -54,16 +54,16 @@ class AnimalController extends Controller
     }
 
     /**
-     * Creates a new Animal model.
+     * Creates a new Utilisateur model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Animal();
+        $model = new Utilisateur();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idanimal]);
+            return $this->redirect(['view', 'id' => $model->mail]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,9 +72,9 @@ class AnimalController extends Controller
     }
 
     /**
-     * Updates an existing Animal model.
+     * Updates an existing Utilisateur model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -82,7 +82,7 @@ class AnimalController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idanimal]);
+            return $this->redirect(['view', 'id' => $model->mail]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,9 +91,9 @@ class AnimalController extends Controller
     }
 
     /**
-     * Deletes an existing Animal model.
+     * Deletes an existing Utilisateur model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -104,15 +104,15 @@ class AnimalController extends Controller
     }
 
     /**
-     * Finds the Animal model based on its primary key value.
+     * Finds the Utilisateur model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Animal the loaded model
+     * @param string $id
+     * @return Utilisateur the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Animal::findOne($id)) !== null) {
+        if (($model = Utilisateur::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

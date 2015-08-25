@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Animal;
+use app\models\Trouve;
 
 /**
- * AnimalSearch represents the model behind the search form about `app\models\Animal`.
+ * TrouveSearch represents the model behind the search form about `app\models\Trouve`.
  */
-class AnimalSearch extends Animal
+class TrouveSearch extends Trouve
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class AnimalSearch extends Animal
     public function rules()
     {
         return [
-            [['idanimal', 'chienDuMois', 'coupDeCoeur'], 'integer'],
-            [['type', 'zone', 'etat', 'nom', 'sexe', 'sterilise', 'dateNaissance', 'race', 'description', 'ententeChiens', 'ententeChats', 'ententeEnfants'], 'safe'],
+            [['idtrouve', 'age'], 'integer'],
+            [['type', 'nom', 'race', 'couleur', 'identification', 'lieu', 'date', 'photo', 'description', 'utilisateur'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AnimalSearch extends Animal
      */
     public function search($params)
     {
-        $query = Animal::find();
+        $query = Trouve::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,23 +56,20 @@ class AnimalSearch extends Animal
         }
 
         $query->andFilterWhere([
-            'idanimal' => $this->idanimal,
-            'dateNaissance' => $this->dateNaissance,
-            'chienDuMois' => $this->chienDuMois,
-            'coupDeCoeur' => $this->coupDeCoeur,
+            'idtrouve' => $this->idtrouve,
+            'age' => $this->age,
+            'date' => $this->date,
         ]);
 
         $query->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'zone', $this->zone])
-            ->andFilterWhere(['like', 'etat', $this->etat])
             ->andFilterWhere(['like', 'nom', $this->nom])
-            ->andFilterWhere(['like', 'sexe', $this->sexe])
-            ->andFilterWhere(['like', 'sterilise', $this->sterilise])
             ->andFilterWhere(['like', 'race', $this->race])
+            ->andFilterWhere(['like', 'couleur', $this->couleur])
+            ->andFilterWhere(['like', 'identification', $this->identification])
+            ->andFilterWhere(['like', 'lieu', $this->lieu])
+            ->andFilterWhere(['like', 'photo', $this->photo])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'ententeChiens', $this->ententeChiens])
-            ->andFilterWhere(['like', 'ententeChats', $this->ententeChats])
-            ->andFilterWhere(['like', 'ententeEnfants', $this->ententeEnfants]);
+            ->andFilterWhere(['like', 'utilisateur', $this->utilisateur]);
 
         return $dataProvider;
     }
