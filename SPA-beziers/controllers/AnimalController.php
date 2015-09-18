@@ -8,7 +8,7 @@ use app\models\AnimalSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\data\SqlDataProvider;
 /**
  * AnimalController implements the CRUD actions for Animal model.
  */
@@ -36,6 +36,52 @@ class AnimalController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all adoptable dogs
+     * @return mixed
+     */
+    public function actionIndexChiens()
+    {
+        $searchModel = new AnimalSearch();
+        $count=Yii::$app->db->createCommand("SELECT COUNT idAnimal FROM Animal WHERE etat='adoptable' AND type='chien'");
+        $dataProvider=new SqlDataProvider([
+                'sql' => "SELECT *
+                          FROM animal a, animal_photo, photo
+                          WHERE a.etat='adoptable'
+                          AND a.type='chien'",
+                'totalCount' => $count,
+                'pagination' => false,
+            ]);
+
+        return $this->render('index-chiens', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all adoptable cats
+     * @return mixed
+     */
+    public function actionIndexChats()
+    {
+        $searchModel = new AnimalSearch();
+        $count=Yii::$app->db->createCommand("SELECT COUNT idAnimal FROM Animal WHERE etat='adoptable' AND type='chat'");
+        $dataProvider=new SqlDataProvider([
+                'sql' => "SELECT *
+                          FROM animal a, animal_photo, photo
+                          WHERE a.etat='adoptable'
+                          AND a.type='chat'",
+                'totalCount' => $count,
+                'pagination' => false,
+            ]);
+
+        return $this->render('index-chats', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

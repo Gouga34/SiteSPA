@@ -7,7 +7,7 @@ use yii\data\SqlDataProvider;
 /* @var $searchModel app\models\AnimalSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Animaux';
+$this->title = "Chiens à l'adoption";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="animal-index">
@@ -19,17 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php //echo  Html::a('Create Animal', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php
-        $count=Yii::$app->db->createCommand("SELECT COUNT idAnimal FROM Animal WHERE etat='adoptable' AND type='chien'");
-        $dataProvider=new SqlDataProvider([
-                'sql' => "SELECT *
-                          FROM animal, animal_photo, photo
-                          WHERE etat='adoptable'
-                          AND type='chien'",
-                'totalCount' => $count,
-                'pagination' => false,
-            ]);
-    ?>
 
 
 
@@ -40,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'idanimal',
-            'photo',
+            [
+                'attribute' => 'photo',
+                'format' => 'raw',
+                'value' => function($model){
+                    $url=\Yii::$app->request->BaseUrl.'/images/chiens/'.$model['photo'];
+                    return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;border:3px groove gray;']);
+                }
+            ],
             'nom',            
             'sexe',
             // 'sterilise',
