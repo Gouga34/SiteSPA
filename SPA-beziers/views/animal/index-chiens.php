@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -37,7 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;border:3px groove gray;']);
                 }
             ],
-            'nom',            
+            [
+                'attribute' =>'nom',
+                'format' => 'raw',
+                'value'=> function($model){
+                    return Html::a($model['nom'], ['animal/view', 'id' => $model['idanimal']]);
+                }
+
+            ],            
             'sexe',
             // 'sterilise',
             'dateNaissance',

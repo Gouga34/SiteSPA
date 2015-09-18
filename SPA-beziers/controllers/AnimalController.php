@@ -48,12 +48,14 @@ class AnimalController extends Controller
     public function actionIndexChiens()
     {
         $searchModel = new AnimalSearch();
-        $count=Yii::$app->db->createCommand("SELECT COUNT idAnimal FROM Animal WHERE etat='adoptable' AND type='chien'");
+        $count=Yii::$app->db->createCommand("SELECT COUNT(distinct idAnimal) FROM Animal WHERE etat='adoptable' AND type='chien'");
         $dataProvider=new SqlDataProvider([
                 'sql' => "SELECT *
-                          FROM animal a, animal_photo, photo
+                          FROM animal a, animal_photo ap, photo p
                           WHERE a.etat='adoptable'
-                          AND a.type='chien'",
+                          AND a.type='chien'
+                          AND a.idanimal = ap.idanimal
+                          AND p.idphoto=ap.idphoto",
                 'totalCount' => $count,
                 'pagination' => false,
             ]);
@@ -71,12 +73,14 @@ class AnimalController extends Controller
     public function actionIndexChats()
     {
         $searchModel = new AnimalSearch();
-        $count=Yii::$app->db->createCommand("SELECT COUNT idAnimal FROM Animal WHERE etat='adoptable' AND type='chat'");
+        $count=Yii::$app->db->createCommand("SELECT COUNT (distinct idanimal) FROM Animal WHERE etat='adoptable' AND type='chat'");
         $dataProvider=new SqlDataProvider([
-                'sql' => "SELECT *
-                          FROM animal a, animal_photo, photo
+                'sql' => "SELECT p.photo, distinct a.idanimal
+                          FROM animal a, animal_photo ap, photo p
                           WHERE a.etat='adoptable'
-                          AND a.type='chat'",
+                          AND a.type='chat'
+                          AND a.idanimal = ap.idanimal
+                          AND p.idphoto=ap.idphoto",
                 'totalCount' => $count,
                 'pagination' => false,
             ]);
@@ -94,8 +98,17 @@ class AnimalController extends Controller
      */
     public function actionView($id)
     {
+
+        $req="SELECT photo 
+              FROM photo p, animal a, animal_photo ap 
+              WHERE a.idanimal=ap.idanimal
+              AND ap.idphoto=p.idphoto";
+
+        $photos=Yii::$app->db->createCommand($req)->queryAll();  
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'photos'=> $photos,
         ]);
     }
 
