@@ -17,6 +17,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="shortcut icon" href="../web/images/logo.png" />
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -27,26 +28,58 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => Html::img('@web/images/logo.png',['alt'=>Yii::$app->name, 'style' => 'width:30%;margin-top:-10%;']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    ///Mise en place du menu:///
+    $menuItems[]=['label' => 'Accueil', 'url' => ['/site/index']];
+
+    //Menu des membres connectés : 
+        ////TODO
+    //Menu des utilisateurs consultants :
+   // if(Yii::$app->user->isGuest){
+        $menuItems[]=[
+            'label' => 'Nos animaux',
+            'items' => [
+                ['label' => "Chiens à l'adoption", 'url' => ['/animal/index-chiens']],
+                ['label' => "Chats à l'adoption", 'url' => ['/animal/index-chats']],
+                ['label' => 'Ils ont trouvé le bonheur', 'url' => ['/photo/index']]
+            ]
+        ];
+        $menuItems[]=[
+            'label' => 'Perdus / Trouvés',
+            'items' => [
+                ['label' => 'Perdus', 'url' => ['/perdu/index']],
+                ['label' => 'Trouvés', 'url' => ['/trouve/index']],
+                // ['label' => "J'ai perdu mon chat, que faire ?", 'url' => '#'],
+            ]
+        ];
+        $menuItems[]=[
+            'label' => 'Nous aider',
+            'items' => [
+                // ['label' => 'Perdus', 'url' => ['/perdu/index']],
+                // ['label' => 'Trouvés', 'url' => ['/trouve/index']],
+                // // ['label' => "J'ai perdu mon chat, que faire ?", 'url' => '#'],
+            ]
+        ];
+        $menuItems[]=[
+            'label' => 'Contact',
+            'items' => [
+                ['label' => 'FAQ', 'url' => ['/faq/index']],
+                ['label' => 'Contact', 'url' => ['/site/contact']],
+            ]
+        ];
+   // }
+
+    
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
-                [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ],
-        ],
+                'items' => $menuItems
     ]);
     NavBar::end();
     ?>
