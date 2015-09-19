@@ -20,7 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-
+    <?php
+        $template='{view} {link}';
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -62,7 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'chienDuMois',
             // 'coupDeCoeur',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template' => $template],
         ],
     ]); ?>
 

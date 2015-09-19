@@ -56,6 +56,12 @@ class AnimalController extends Controller
                           AND a.type='chien'",
                 'totalCount' => $count,
                 'pagination' => false,
+                'sort' =>[
+                    'attributes' => [
+                        'nom',
+                        'sexe'
+                    ]
+                ]
             ]);
 
         return $this->render('index-chiens', [

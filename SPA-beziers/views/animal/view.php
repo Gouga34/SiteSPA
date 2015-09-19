@@ -25,26 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         //     ],
         // ]) ?>
     </p>
-
+    <div id="carouselAnimal">
     <?php
         $images[]=null;
         $i=0;
         foreach ($photos as $photo) {
-            $images[$i]=['content' => "<img src=\"./images/".$model->type."s/".$photo['photo']."\">", 
-                        'options' => ['style' => ' min-height: 10%;min-width: 300px;max-heigth:10%;align:center;' ]];
+            $images[$i]=[
+                'content' => "<img src=\"./images/".$model->type."s/".$photo['photo']."\">", 
+                'options' => ['style' => 'width:500px;height:500px;background-color:#5f666d;color:white;margin:0px auto']
+
+            ];
             $i++;
         }
         echo yii\bootstrap\Carousel::widget([
-         'items'=>$images,
+            'items'=>$images,
+        ]);
 
-
-
-
-            ]);
-
-//         $images=['<img src="/path/to/file1"/>','<img src="/path/to/file2"/>','<img src="/path/to/file3"/>'];
-// echo yii\bootstrap\Carousel::widget(['items'=>$images]);
     ?>
+</div>
 
     <?= DetailView::widget([
         'model' => $model,
