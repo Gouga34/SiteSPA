@@ -62,7 +62,7 @@ class Animal extends \yii\db\ActiveRecord
             'etat' => 'Etat',
             'nom' => 'Nom',
             'sexe' => 'Sexe',
-            'sterilise' => 'Sterilise',
+            'sterilise' => 'Sterilisé',
             'dateNaissance' => 'Date Naissance',
             'race' => 'Race',
             'description' => 'Description',

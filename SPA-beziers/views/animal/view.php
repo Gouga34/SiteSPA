@@ -47,19 +47,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idanimal',
+            // 'idanimal',
             // 'type',
-            'zone',
-            'etat',
-            'nom',
+            // 'nom',
             'sexe',
+            // 'zone',
+            // 'etat',
             'sterilise',
             'dateNaissance',
             'race',
-            'description:ntext',
-            'ententeChiens',
-            'ententeChats',
-            'ententeEnfants',
+           
+            [
+                'attribute' =>'ententeChiens',
+                'format' => 'raw',
+                'value' => $model->ententeChiens===null ? "inconnues" : $model->ententeChiens
+                
+            ],
+            [
+                'attribute' =>'ententeChats',
+                'format' => 'raw',
+                'value' => $model->ententeChats===null ? "inconnues" : $model->ententeChats
+                
+            ],
+            [
+                'attribute' =>'ententeEnfants',
+                'format' => 'raw',
+                'value' => $model->ententeEnfants===null ? "inconnues" : $model->ententeEnfants
+                
+            ],
+             'description:ntext',
         ],
     ]) ?>
 

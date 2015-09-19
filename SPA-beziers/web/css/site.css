@@ -95,4 +95,9 @@ a.desc:after {
 #carouselAnimal{
     width:500px;
     margin:0px auto;
+    margin-bottom: 3%;
+}
+
+h1 {
+    text-align: center;
 }
