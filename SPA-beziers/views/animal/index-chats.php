@@ -30,10 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'idanimal',
             [
-                'attribute' => 'photo',
+                'attribute' => 'Photo',
                 'format' => 'image',
                 'value' => function($model){
-                    return './images/chats/'.$model['photo'];
+
+                    $req="SELECT p.photo 
+                          FROM animal a, photo p, animal_photo ap 
+                          WHERE a.idanimal=".$model['idanimal']."
+                          AND a.idanimal=ap.idanimal
+                          AND ap.idphoto=p.idphoto";
+                    $result = Yii::$app->db->createCommand($req)->queryScalar();
+                    $url=\Yii::$app->request->BaseUrl.'/images/chats/'.$result;
+                    return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;border:3px groove gray;']);
                 }
             ],
             'nom',            

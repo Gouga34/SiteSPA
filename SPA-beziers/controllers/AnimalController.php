@@ -51,11 +51,9 @@ class AnimalController extends Controller
         $count=Yii::$app->db->createCommand("SELECT COUNT(distinct idAnimal) FROM Animal WHERE etat='adoptable' AND type='chien'");
         $dataProvider=new SqlDataProvider([
                 'sql' => "SELECT *
-                          FROM animal a, animal_photo ap, photo p
+                          FROM animal a
                           WHERE a.etat='adoptable'
-                          AND a.type='chien'
-                          AND a.idanimal = ap.idanimal
-                          AND p.idphoto=ap.idphoto",
+                          AND a.type='chien'",
                 'totalCount' => $count,
                 'pagination' => false,
             ]);
@@ -75,12 +73,10 @@ class AnimalController extends Controller
         $searchModel = new AnimalSearch();
         $count=Yii::$app->db->createCommand("SELECT COUNT (distinct idanimal) FROM Animal WHERE etat='adoptable' AND type='chat'");
         $dataProvider=new SqlDataProvider([
-                'sql' => "SELECT p.photo, distinct a.idanimal
-                          FROM animal a, animal_photo ap, photo p
+                'sql' => "SELECT *
+                          FROM animal a
                           WHERE a.etat='adoptable'
-                          AND a.type='chat'
-                          AND a.idanimal = ap.idanimal
-                          AND p.idphoto=ap.idphoto",
+                          AND a.type='chat'",
                 'totalCount' => $count,
                 'pagination' => false,
             ]);
