@@ -104,6 +104,24 @@ class PhotoController extends Controller
     }
 
     /**
+     * @action récupère la liste des photos des nouvelles des adoptés
+     * @return type
+     */
+    public function actionNouvellesAdoptes(){
+
+        $req="SELECT *"
+           . "FROM photo p "
+           . "WHERE p.type='apres-adoption'";
+        $command = Yii::$app->db->createCommand($req);
+        $photos = $command->queryAll();
+
+        return $this->render('nouvelles-adoptes', [
+                 'photos' => $photos,
+             ]);
+    }
+
+    
+    /**
      * Finds the Photo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

@@ -47,7 +47,7 @@ AppAsset::register($this);
             'items' => [
                 ['label' => "Chiens à l'adoption", 'url' => ['/animal/index-chiens']],
                 ['label' => "Chats à l'adoption", 'url' => ['/animal/index-chats']],
-                ['label' => 'Ils ont trouvé le bonheur', 'url' => ['/photo/index']]
+                ['label' => 'Ils ont trouvé le bonheur', 'url' => ['/photo/nouvelles-adoptes']]
             ]
         ];
         $menuItems[]=[
