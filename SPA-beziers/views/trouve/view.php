@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Trouve */
 
-$this->title = $model->idtrouve;
+$this->title = $model->nom;
 $this->params['breadcrumbs'][] = ['label' => 'Trouves', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,20 +15,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idtrouve], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idtrouve], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php // Html::a('Update', ['update', 'id' => $model->idtrouve], ['class' => 'btn btn-primary']) ?>
+        <?php // Html::a('Delete', ['delete', 'id' => $model->idtrouve], [
+//            'class' => 'btn btn-danger',
+//            'data' => [
+//                'confirm' => 'Are you sure you want to delete this item?',
+//                'method' => 'post',
+//            ],
+//        ]) ?>
     </p>
-
-    <?= DetailView::widget([
+    <?php
+        $url=\Yii::$app->request->BaseUrl.'/images/trouves/'.$model->photo;
+         echo Html::img($url,
+                    ['alt'=>($model->photo),
+                     'style' => 'width:auto;height:400px;color:white; margin-bottom:3%;', 
+                     'class' => "img-responsive center-block img-thumbnail"]);
+        
+    ?>
+    
+        <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idtrouve',
             'type',
             'nom',
             'age',
@@ -37,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'identification',
             'lieu',
             'date',
-            'photo',
             'description:ntext',
             'utilisateur',
         ],

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Perdu */
 
-$this->title = $model->idperdu;
+$this->title = $model->nom;
 $this->params['breadcrumbs'][] = ['label' => 'Perdus', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,20 +15,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idperdu], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idperdu], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php // Html::a('Update', ['update', 'id' => $model->idperdu], ['class' => 'btn btn-primary']) ?>
+        <?php // Html::a('Delete', ['delete', 'id' => $model->idperdu], [
+//            'class' => 'btn btn-danger',
+//            'data' => [
+//                'confirm' => 'Are you sure you want to delete this item?',
+//                'method' => 'post',
+//            ],
+//        ]) ?>
     </p>
 
+     <?php
+        $url=\Yii::$app->request->BaseUrl.'/images/perdus/'.$model->photo;
+        echo Html::img($url,
+                    ['alt'=>($model->photo),
+                     'style' => 'width:auto;height:400px;color:white; margin-bottom:3%;', 
+                     'class' => "img-responsive center-block"]);
+    ?>
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idperdu',
             'type',
             'nom',
             'age',
