@@ -25,7 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idtrouve',
+            [
+                'attribute' => 'photo',
+                'format' => 'raw',
+                'value' => function($model){
+                    $url=\Yii::$app->request->BaseUrl.'/images/trouves/'.$model->photo;
+                    return Html::img($url,['alt'=>($model->photo),'style' => 'width:100px;border:3px groove gray;']);
+               
+                }
+            ],
             'type',
             'nom',
             'age',
