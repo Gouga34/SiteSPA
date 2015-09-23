@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                           AND ap.idphoto=p.idphoto";
                     $result = Yii::$app->db->createCommand($req)->queryScalar();
                     $url=\Yii::$app->request->BaseUrl.'/images/chiens/'.$result;
-                    return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;border:3px groove gray;']);
+                    return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;', 'class' => 'img-thumbnail']);
                 }
             ],
             [
