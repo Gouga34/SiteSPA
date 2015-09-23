@@ -25,7 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idperdu',
+            //'idperdu',
+            [
+                'attribute' => 'photo',
+                'format' => 'raw',
+                'value' => function($model){
+                    $url=\Yii::$app->request->BaseUrl.'/images/perdus/'.$model->photo;
+                    return Html::img($url,['alt'=>($model->photo),'style' => 'width:100px;border:3px groove gray;']);
+               
+                }
+            ],
             'type',
             'nom',
             'age',
@@ -34,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'identification',
             // 'lieu',
             // 'date',
-            // 'photo',
             // 'description:ntext',
             // 'utilisateur',
 
