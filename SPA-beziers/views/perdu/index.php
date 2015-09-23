@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($model){
                     $url=\Yii::$app->request->BaseUrl.'/images/perdus/'.$model->photo;
-                    return Html::img($url,['alt'=>($model->photo),'style' => 'width:100px;', 'class' => 'img-thumbnail']);
+                    return Html::a(Html::img($url,['alt'=>($model->photo),'style' => 'width:150px;', 'class' => 'img-thumbnail']), ['perdu/view','id'=> $model->idperdu]);
                
                 }
             ],

@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                           AND ap.idphoto=p.idphoto";
                     $result = Yii::$app->db->createCommand($req)->queryScalar();
                     $url=\Yii::$app->request->BaseUrl.'/images/chats/'.$result;
-                    return Html::img($url,['alt'=>$model['nom'],'style' => 'width:100px;', 'class'=> 'img-thumbnail']);
+                     return Html::a(Html::img($url,['alt'=>$model['nom'],'style' => 'width:150px;', 'class' => 'img-thumbnail']), ['animal/view', 'id' => $model['idanimal']]);
                 }
             ],
             'nom',            
