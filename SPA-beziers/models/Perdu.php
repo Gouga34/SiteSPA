@@ -62,7 +62,7 @@ class Perdu extends \yii\db\ActiveRecord
             'date' => 'Date',
             'photo' => 'Photo',
             'description' => 'Description',
-            'utilisateur' => 'Utilisateur',
+            'utilisateur' => 'Auteur de l\'annonce',
         ];
     }
 }

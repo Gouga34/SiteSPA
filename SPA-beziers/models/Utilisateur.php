@@ -44,11 +44,11 @@ class Utilisateur extends \yii\db\ActiveRecord
     {
         return [
             'type' => 'Type',
-            'mdp' => 'Mdp',
+            'mdp' => 'Mot De Passe',
             'nom' => 'Nom',
-            'prenom' => 'Prenom',
+            'prenom' => 'Prénom',
             'mail' => 'Mail',
-            'telephone' => 'Telephone',
+            'telephone' => 'Téléphone',
         ];
     }
 }

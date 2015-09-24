@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PerduSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Perdus';
+$this->title = 'Les Animaux Perdus';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="perdu-index">

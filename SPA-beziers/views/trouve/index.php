@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TrouveSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Trouves';
+$this->title = 'Les Animaux Trouvés';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="trouve-index">
