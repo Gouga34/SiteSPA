@@ -82,7 +82,8 @@ class AnimalController extends Controller
         $req="SELECT photo 
               FROM photo p, animal a, animal_photo ap 
               WHERE a.idanimal=ap.idanimal
-              AND ap.idphoto=p.idphoto";
+              AND ap.idphoto=p.idphoto 
+              AND a.idanimal='".$id."'";
 
         $photos=Yii::$app->db->createCommand($req)->queryAll();  
 
