@@ -49,7 +49,38 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $req="SELECT min(p.photo) as photo, a.type, a.nom "
+           . "FROM animal a, photo p, animal_photo ap "
+           . "WHERE a.idanimal=ap.idanimal "
+           . "AND ap.idphoto=p.idphoto "
+           . "AND a.etat='adoptable' "
+           . "AND a.coupDeCoeur=1 "
+           . "GROUP BY a.nom";
+        $sauvetages = Yii::$app->db->createCommand($req)->queryAll();
+        
+        $req="SELECT p.photo, a.type, a.nom "
+           . "FROM animal a, photo p, animal_photo ap "
+           . "WHERE a.idanimal=ap.idanimal "
+           . "AND ap.idphoto=p.idphoto "
+           . "AND a.etat='adoptable' "
+           . "AND a.chienDuMois=1 ";
+        $animalDuMois = Yii::$app->db->createCommand($req)->queryAll();
+        
+        //TODO:ajouter le chien dont c'est l'anniversaire aujourd'hui !
+        $req="SELECT p.photo, a.type, a.nom "
+           . "FROM animal a, photo p, animal_photo ap "
+           . "WHERE a.idanimal=ap.idanimal "
+           . "AND ap.idphoto = p.idphoto "
+           . "AND a.etat='adoptable'"
+           . "AND month(dateNaissance)=month(current_date) "
+           . "AND day(dateNaissance)=day(current_date)";
+        $anniversaire = Yii::$app->db->createCommand($req)->queryAll();
+        
+        return $this->render('index',[
+            'sauvetages'=>$sauvetages,
+            'animalDuMois'=>$animalDuMois,
+            'anniversaire' => $anniversaire
+        ]);
     }
 
     public function actionLogin()
