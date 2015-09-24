@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?php // Html::a('Create Trouve', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
+    <?php 
+        $template="{view} {link}";
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -46,7 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'description:ntext',
             // 'utilisateur',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template' => $template],
         ],
     ]); ?>
 

@@ -48,21 +48,7 @@ class AnimalController extends Controller
     public function actionIndexChiens()
     {
         $searchModel = new AnimalSearch();
-        $count=Yii::$app->db->createCommand("SELECT COUNT(distinct idAnimal) FROM Animal WHERE etat='adoptable' AND type='chien'");
-        $dataProvider=new SqlDataProvider([
-                'sql' => "SELECT *
-                          FROM animal a
-                          WHERE a.etat='adoptable'
-                          AND a.type='chien'",
-                'totalCount' => $count,
-                'pagination' => false,
-                'sort' =>[
-                    'attributes' => [
-                        'nom',
-                        'sexe'
-                    ]
-                ]
-            ]);
+        $dataProvider=$searchModel->searchChien(Yii::$app->request->queryParams);
 
         return $this->render('index-chiens', [
             'searchModel' => $searchModel,
@@ -77,15 +63,7 @@ class AnimalController extends Controller
     public function actionIndexChats()
     {
         $searchModel = new AnimalSearch();
-        $count=Yii::$app->db->createCommand("SELECT COUNT (distinct idanimal) FROM Animal WHERE etat='adoptable' AND type='chat'");
-        $dataProvider=new SqlDataProvider([
-                'sql' => "SELECT *
-                          FROM animal a
-                          WHERE a.etat='adoptable'
-                          AND a.type='chat'",
-                'totalCount' => $count,
-                'pagination' => false,
-            ]);
+        $dataProvider=$searchModel->searchChat(Yii::$app->request->queryParams);
 
         return $this->render('index-chats', [
             'searchModel' => $searchModel,
