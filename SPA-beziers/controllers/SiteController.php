@@ -49,6 +49,54 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+       
+        $sauvetages = $this->getSauvetages();
+        
+        $animalDuMois=$this->getAnimalMois();
+        
+        $anniversaire = $this->getAnniversaire();
+        
+        return $this->render('index',[
+            'sauvetages'=>$sauvetages,
+            'animalDuMois'=>$animalDuMois,
+            'anniversaire' => $anniversaire
+        ]);
+    }
+    
+    /**
+     * 
+     * @return les photos de l'animal dont c'est l'anniversaire 
+     */
+    private function getAnniversaire(){
+         $req="SELECT p.photo, a.type, a.nom "
+           . "FROM animal a, photo p, animal_photo ap "
+           . "WHERE a.idanimal=ap.idanimal "
+           . "AND ap.idphoto = p.idphoto "
+           . "AND a.etat='adoptable'"
+           . "AND month(dateNaissance)=month(current_date) "
+           . "AND day(dateNaissance)=day(current_date)";
+        return Yii::$app->db->createCommand($req)->queryAll();
+    }
+    
+    /**
+     * 
+     * @return les photos de l'animal du mois
+     */
+    private function getAnimalMois(){
+        $req="SELECT p.photo, a.type, a.nom "
+           . "FROM animal a, photo p, animal_photo ap "
+           . "WHERE a.idanimal=ap.idanimal "
+           . "AND ap.idphoto=p.idphoto "
+           . "AND a.etat='adoptable' "
+           . "AND a.chienDuMois=1 ";
+        return Yii::$app->db->createCommand($req)->queryAll();
+    }
+    
+    /**
+     * 
+     * @return la liste des sauvetages (tableau)
+     */
+    private function getSauvetages(){
         $req="SELECT min(p.photo) as photo, a.type, a.nom "
            . "FROM animal a, photo p, animal_photo ap "
            . "WHERE a.idanimal=ap.idanimal "
@@ -56,31 +104,7 @@ class SiteController extends Controller
            . "AND a.etat='adoptable' "
            . "AND a.coupDeCoeur=1 "
            . "GROUP BY a.nom";
-        $sauvetages = Yii::$app->db->createCommand($req)->queryAll();
-        
-        $req="SELECT p.photo, a.type, a.nom "
-           . "FROM animal a, photo p, animal_photo ap "
-           . "WHERE a.idanimal=ap.idanimal "
-           . "AND ap.idphoto=p.idphoto "
-           . "AND a.etat='adoptable' "
-           . "AND a.chienDuMois=1 ";
-        $animalDuMois = Yii::$app->db->createCommand($req)->queryAll();
-        
-        //TODO:ajouter le chien dont c'est l'anniversaire aujourd'hui !
-        $req="SELECT p.photo, a.type, a.nom "
-           . "FROM animal a, photo p, animal_photo ap "
-           . "WHERE a.idanimal=ap.idanimal "
-           . "AND ap.idphoto = p.idphoto "
-           . "AND a.etat='adoptable'"
-           . "AND month(dateNaissance)=month(current_date) "
-           . "AND day(dateNaissance)=day(current_date)";
-        $anniversaire = Yii::$app->db->createCommand($req)->queryAll();
-        
-        return $this->render('index',[
-            'sauvetages'=>$sauvetages,
-            'animalDuMois'=>$animalDuMois,
-            'anniversaire' => $anniversaire
-        ]);
+        return Yii::$app->db->createCommand($req)->queryAll();
     }
 
     public function actionLogin()
