@@ -96,5 +96,8 @@ class SiteController extends Controller
         return $this->render('devenir-benevole');
     }
     
+    public function actionFaireUnDon(){
+        return $this->render('faire-un-don');
+    }
     
 }

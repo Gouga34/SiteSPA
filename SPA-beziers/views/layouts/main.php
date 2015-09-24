@@ -61,7 +61,8 @@ AppAsset::register($this);
         $menuItems[]=[
             'label' => 'Nous aider',
             'items' => [
-                ['label' => 'Devenir Bénévole', 'url' => ['/site/devenir-benevole']]
+                ['label' => 'Devenir Bénévole', 'url' => ['/site/devenir-benevole']],
+                ['label' => 'Faire un Don', 'url' => ['/site/faire-un-don']],
                 //['label' => "J'ai perdu mon chat, que faire ?", 'url' => '#'],
             ]
         ];
