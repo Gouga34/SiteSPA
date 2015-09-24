@@ -100,4 +100,8 @@ class SiteController extends Controller
         return $this->render('faire-un-don');
     }
     
+    public function actionPerduChat(){
+        return $this->render('perdu-chat');
+    }
+    
 }

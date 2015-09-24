@@ -55,7 +55,7 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Perdus', 'url' => ['/perdu/index']],
                 ['label' => 'Trouvés', 'url' => ['/trouve/index']],
-                // ['label' => "J'ai perdu mon chat, que faire ?", 'url' => '#'],
+                ['label' => "J'ai perdu mon chat, que faire ?", 'url' => ['/site/perdu-chat']],
             ]
         ];
         $menuItems[]=[
@@ -63,7 +63,6 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Devenir Bénévole', 'url' => ['/site/devenir-benevole']],
                 ['label' => 'Faire un Don', 'url' => ['/site/faire-un-don']],
-                //['label' => "J'ai perdu mon chat, que faire ?", 'url' => '#'],
             ]
         ];
         $menuItems[]=[
