@@ -51,7 +51,7 @@ $this->title = 'SPA Béziers';
             foreach ($animalDuMois as $photo) {
                 $photosMois[$i]=[
                     'content' => "<img src=\"./images/".$photo['type']."s/".$photo['photo']."\">", 
-                    'options' => ['style' => 'width:auto;height:50%;background-color:white;color:white;margin:0px auto']
+                    'options' => ['style' => 'width:auto;height:400px;background-color:white;color:white;margin:0px auto']
                 ];
                 $i++;
             }
@@ -65,7 +65,10 @@ $this->title = 'SPA Béziers';
   
     
     <?php
-        if($anniversaire!==false){        
+ 
+        if($anniversaire){   
+               
+
     ?>
 <div class="row">
     <div class="col-md-12" style="text-align:center"><h2>Bon anniversaire <?php echo $anniversaire[0]['nom']; ?> !</h2></div>
@@ -73,7 +76,7 @@ $this->title = 'SPA Béziers';
 <div class="row">
   <div class="col-md-7">
     <?php
-       if($anniversaire!==false){
+       if($anniversaire!==false || count($anniversaire)>0){
             $images[]=null;
             $i=0;
             foreach ($anniversaire as $photo) {
@@ -105,9 +108,5 @@ $this->title = 'SPA Béziers';
     <?php 
         }
    ?>
-        
-        
-        
-        
-        
+          
 </div>
